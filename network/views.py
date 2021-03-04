@@ -1,19 +1,31 @@
+import json
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
-from .models import User
-
+from .models import User, Post, Follower
 
 def index(request):
-    return render(request, "network/index.html")
-
+    if request.method == "POST":
+        content = request.POST["content"]
+        if len(content) > 0:
+            Post.objects.create(content=content, user=request.user)
+        return HttpResponseRedirect(reverse("index"))
+    all_posts = Post.objects.all().order_by("-timestamp")
+    paginator = Paginator(all_posts, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, "network/index.html",{
+            "page_obj": page_obj,
+            "posts": all_posts,
+        })
 
 def login_view(request):
     if request.method == "POST":
-
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]

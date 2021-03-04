@@ -1,5 +1,36 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    TODO
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea
+                        class="form-control"
+                        id="postContent"
+                        maxlength="512"
+                        rows="2"
+                        name="content"
+                        placeholder="What's on your mind, {{ user.username|capfirst }}?"></textarea>
+                    <input type="submit" class="btn btn-primary" id="post-btn" value="Post"/>
+                </div>
+            </form>
+            <div class="posts-container">
+                {%  for post in page_obj %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.user.username|capfirst }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Posted at {{ post.timestamp }}</h6>
+                            <p class="card-text">{{ post.content }}</p>
+                            <p class="card-text">likes: {{ post.likes.count }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

@@ -1,0 +1,29 @@
+textarea {
+    resize:none;
+
+}
+
+.form-group {
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+#post-btn {
+    margin-top: 10px;
+    float: right;
+    padding:2px 10px;
+    border-radius: 20px;
+}
+
+.col-md-8 {
+    background-color:whitesmoke;
+    min-height: 100vh;
+}
+
+.posts-container {
+    overflow: auto;
+}
+
+.card {
+    margin-bottom: 20px;
+}
