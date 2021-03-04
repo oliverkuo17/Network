@@ -73,3 +73,33 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+
+def post(request, post_id):
+    try:
+        post = Post.objects.get(pk=post_id)
+    except Post.DoesNotExist:
+        return JsonResponse({"error": "Post not found."}, status=404)
+
+    # Return post contents
+    if request.method == "GET":
+        return JsonResponse(post.serialize())
+
+    # Update post likes
+    elif request.method == "PUT":
+        # data = json.loads(request.body)
+        if request.user in post.likes.all():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+        post.save()
+        return HttpResponse(status=204)
+
+    # Post must be via GET or PUT
+    else:
+        return JsonResponse({
+            "error": "GET or PUT request required."
+        }, status=400)
+
+def profile(request):
+    pass

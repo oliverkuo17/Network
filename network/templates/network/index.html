@@ -2,8 +2,8 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <form action="#" method="post">
                 {% csrf_token %}
                 <div class="form-group">
@@ -25,6 +25,9 @@
                             <h6 class="card-subtitle mb-2 text-muted">Posted at {{ post.timestamp }}</h6>
                             <p class="card-text">{{ post.content }}</p>
                             <p class="card-text">likes: {{ post.likes.count }}</p>
+                            <a href="#" data-postId="{{ post.id }}" class="btn btn-light like" id="like">Like</a>
+                            <a href="#" class="btn btn-light comment" id="comment">Comment</a>
+                            <a href="#" class="btn btn-light share" id="share">Share</a>
                         </div>
                     </div>
                 {% endfor %}

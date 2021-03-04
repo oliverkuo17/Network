@@ -1,12 +1,13 @@
 textarea {
     resize:none;
-
 }
 
 .form-group {
     overflow: hidden;
     margin-top: 15px;
 }
+
+
 
 #post-btn {
     margin-top: 10px;
@@ -15,7 +16,16 @@ textarea {
     border-radius: 20px;
 }
 
-.col-md-8 {
+.btn-light {
+    width: 32%;
+    outline: none;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.col-md-6 {
     background-color:whitesmoke;
     min-height: 100vh;
 }
