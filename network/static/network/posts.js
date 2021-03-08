@@ -14,7 +14,16 @@ function toggle_like(post_id) {
         .then(response => response.json())
         .then(result => {
             console.log(result);
-            document.querySelector(`#likes${post_id}`).innerHTML = `likes: ${result.likes_num}`;
+            let ori_like = document.querySelector(`#likes${post_id}`);
+            if (parseInt(result.likes_num) > parseInt(ori_like.innerHTML)) {
+                document.querySelector(`[data-postid='${post_id}']`).style.color = "dodgerblue";
+                document.querySelector(`[data-postid='${post_id}']`).innerHTML = "<i class='fas fa-thumbs-up'></i> Liked";
+            } else {
+                document.querySelector(`[data-postid='${post_id}']`).style.color = "black";
+                document.querySelector(`[data-postid='${post_id}']`).innerHTML = "<i class='far fa-thumbs-up'></i> Like";
+            }
+            document.querySelector(`#likes${post_id}`).innerHTML = `${result.likes_num}`;
+            return false;
         })
 
 

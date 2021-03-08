@@ -37,3 +37,9 @@ textarea {
 .card {
     margin-bottom: 20px;
 }
+
+.fa-heart {
+    color:tomato;
+    margin-right: 5px;
+}
+

@@ -25,10 +25,15 @@
                             <h5 class="card-title">{{ post.user.username|capfirst }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Posted at {{ post.timestamp }}</h6>
                             <p class="card-text">{{ post.content }}</p>
-                            <p class="card-text" id="likes{{ post.id }}">likes: {{ post.likes.count }}</p>
-                            <button data-postid="{{ post.id }}" class="btn btn-light like">Like</button>
-                            <button class="btn btn-light comment">Comment</button>
-                            <button class="btn btn-light share">Share</button>
+                            <p><i class="fas fa-heart"></i><span class="card-text" id="likes{{ post.id }}">{{ post.likes.count }}</span></p>
+                            <hr>
+                            {% if user in post.likes.all %}
+                                <button data-postid="{{ post.id }}" class="btn btn-light like" style="color:dodgerblue"><i class="fas fa-thumbs-up"></i> Liked</button>
+                            {% else %}
+                                <button data-postid="{{ post.id }}" class="btn btn-light like"><i class="far fa-thumbs-up"></i> Like</button>
+                            {% endif %}
+                            <button class="btn btn-light comment"><i class="far fa-comment-alt"></i> Comment</button>
+                            <button class="btn btn-light share"><i class="fas fa-share"></i> Share</button>
                         </div>
                     </div>
                 {% endfor %}
