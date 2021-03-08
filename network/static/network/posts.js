@@ -12,6 +12,10 @@ function toggle_like(post_id) {
         })
     })
         .then(response => response.json())
-        .then(result => {console.log(result);
+        .then(result => {
+            console.log(result);
+            document.querySelector(`#likes${post_id}`).innerHTML = `likes: ${result.likes_num}`;
         })
+
+
 }
