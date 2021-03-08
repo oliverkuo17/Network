@@ -1,5 +1,6 @@
 import json
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -74,12 +75,10 @@ def register(request):
     else:
         return render(request, "network/register.html")
 
-
+@csrf_exempt
+@login_required
 def post(request, post_id):
-    try:
-        post = Post.objects.get(pk=post_id)
-    except Post.DoesNotExist:
-        return JsonResponse({"error": "Post not found."}, status=404)
+    post = Post.objects.get(pk=post_id)
 
     # Return post contents
     if request.method == "GET":
@@ -87,19 +86,15 @@ def post(request, post_id):
 
     # Update post likes
     elif request.method == "PUT":
-        # data = json.loads(request.body)
-        if request.user in post.likes.all():
-            post.likes.remove(request.user)
-        else:
-            post.likes.add(request.user)
+        data = json.loads(request.body)
+        toggle_like = data.get("toggle_like", "")
+        if toggle_like:
+            if request.user in post.likes.all():
+                post.likes.remove(request.user)
+            else:
+                post.likes.add(request.user)
         post.save()
-        return HttpResponse(status=204)
-
-    # Post must be via GET or PUT
-    else:
-        return JsonResponse({
-            "error": "GET or PUT request required."
-        }, status=400)
+        return JsonResponse({"message": "Post edited successfully", "likes_num": post.likes.count()}, status=201)
 
 def profile(request):
     pass

@@ -1,4 +1,5 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
     <div class="row">
@@ -25,15 +26,17 @@
                             <h6 class="card-subtitle mb-2 text-muted">Posted at {{ post.timestamp }}</h6>
                             <p class="card-text">{{ post.content }}</p>
                             <p class="card-text">likes: {{ post.likes.count }}</p>
-                            <a href="#" data-postId="{{ post.id }}" class="btn btn-light like" id="like">Like</a>
-                            <a href="#" class="btn btn-light comment" id="comment">Comment</a>
-                            <a href="#" class="btn btn-light share" id="share">Share</a>
+                            <button data-postId="{{ post.id }}" class="btn btn-light like">Like</button>
+                            <button class="btn btn-light comment">Comment</button>
+                            <button class="btn btn-light share">Share</button>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
+    <script src="{% static 'network/posts.js' %}"></script>
+{% endblock %}
 
-
+{% block script %}
 {% endblock %}
