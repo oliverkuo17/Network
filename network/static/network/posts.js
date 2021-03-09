@@ -22,7 +22,7 @@ function toggle_like(post_id) {
                 document.querySelector(`[data-postid='${post_id}']`).style.color = "black";
                 document.querySelector(`[data-postid='${post_id}']`).innerHTML = "<i class='far fa-thumbs-up'></i> Like";
             }
-            document.querySelector(`#likes${post_id}`).innerHTML = `${result.likes_num}`;
+            document.querySelector(`#likes${post_id}`).innerHTML = ` ${result.likes_num}`;
             return false;
         })
 
