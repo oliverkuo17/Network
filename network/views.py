@@ -117,3 +117,16 @@ def profile(request, user_id):
         "page_obj": page_obj,
         "profile_follower_id": profile_follower_id,
     })
+
+@login_required
+def following(request):
+    user = User.objects.get(id=request.user.id)
+    followees = [followee.user for followee in user.following.all()]
+    posts = Post.objects.filter(user__in=followees).order_by("-timestamp")
+    paginator = Paginator(posts, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, "network/index.html", {
+        "page_obj": page_obj,
+        "followees": followees
+    })
