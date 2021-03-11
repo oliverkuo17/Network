@@ -3,8 +3,8 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col"></div>
+        <div class="col-6">
             <form action="#" method="post">
                 {% csrf_token %}
                 <div class="form-group">
@@ -22,7 +22,7 @@
                 {%  for post in page_obj %}
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ post.user.username|capfirst }}</h5>
+                            <h5 class="card-title"><a href="/profile/{{ user.id }}" style="color:black;">{{ post.user.username|capfirst }}</a></h5>
                             <h6 class="card-subtitle mb-2 text-muted">Posted at {{ post.timestamp }}</h6>
                             <p class="card-text">{{ post.content }}</p>
                             <p><i class="fas fa-heart"></i><span class="card-text" id="likes{{ post.id }}">{{ post.likes.count }}</span></p>
@@ -37,6 +37,39 @@
                         </div>
                     </div>
                 {% endfor %}
+            </div>
+        </div>
+        <div class="col">
+            <h5 class="display-4">Something you might be interested......</h5>
+            <div class="card sponsored-card">
+                <div class="card-body sponsored-card-body">
+                    <div><img src="{% static 'network/oliver.jpg' %}" alt="Oliver Kuo" class="sponsored-img"style="width:120px;height:120px;"></div>
+                    <div class="sponsored-card-text" style="text-align: center;">
+                        <strong>Oliver Kuo</strong>
+                        <br>
+                        <a href="https://github.com/oliverkuo17">GitHub:oliverkuo17</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card sponsored-card">
+                <div class="card-body sponsored-card-body">
+                    <div><img src="{% static 'network/nsw health.jpg' %}" alt="NSW Health" class="sponsored-img"style="width:120px;height:120px;"></div>
+                    <div class="sponsored-card-text" style="text-align: center;">
+                        <strong>NSW Health</strong>
+                        <br>
+                        <a href="https://www.health.nsw.gov.au">health.nsw.gov.au</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card sponsored-card">
+                <div class="card-body sponsored-card-body">
+                    <div><img src="{% static 'network/hellofresh.jpg' %}" alt="Hello Fresh" class="sponsored-img"style="width:120px;height:120px;"></div>
+                    <div style="text-align: center;">
+                        <strong>Cooking with HelloFresh!!</strong>
+                        <br>
+                        <a href="https://www.hellofresh.com.au">hellofresh.com.au</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

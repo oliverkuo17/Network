@@ -31,7 +31,7 @@ textarea {
     box-shadow: none;
 }
 
-.col-md-6 {
+.col-6 {
     min-height: 100vh;
     padding:0px;
 }
@@ -96,4 +96,28 @@ textarea {
 
 .unfollow-btn:hover {
     background-color: rgb(97, 175, 253, 0.3);
+}
+
+.display-4 {
+    font-size: 22px;
+}
+
+.sponsored-card {
+    width:320px;
+    height: 150px;
+}
+
+.sponsored-card-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.sponsored-img {
+    display: block;
+    border-radius: 50%;
+}
+
+.sponsored-card-text {
+    width:160px;
+    height:120px;
 }
