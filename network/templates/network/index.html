@@ -22,7 +22,7 @@
                 {%  for post in page_obj %}
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="/profile/{{ user.id }}" style="color:black;">{{ post.user.username|capfirst }}</a></h5>
+                            <h5 class="card-title"><a href="/profile/{{ post.user.id }}" style="color:black;">{{ post.user.username|capfirst }}</a></h5>
                             <h6 class="card-subtitle mb-2 text-muted">Posted at {{ post.timestamp }}</h6>
                             <p class="card-text">{{ post.content }}</p>
                             <p><i class="fas fa-heart"></i><span class="card-text" id="likes{{ post.id }}">{{ post.likes.count }}</span></p>
